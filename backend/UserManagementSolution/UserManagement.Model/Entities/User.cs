@@ -1,4 +1,6 @@
-﻿namespace UserManagement.Domain.Entities;
+﻿using UserManagement.Domain.ValueObjects;
+
+namespace UserManagement.Domain.Entities;
 
 public class User
 {
@@ -16,4 +18,19 @@ public class User
     public string PasswordHash { get; private set; }
     public bool IsActive { get; private set; }
 
+
+    // Business Rule
+    public void Disable()
+    {
+        if (!IsActive)
+            throw new InvalidOperationException("User is already disabled.");
+        IsActive = false;
+    }
+
+    public void ChangePassword(string newPasswordHash)
+    {
+        if (string.IsNullOrWhiteSpace(newPasswordHash))
+            throw new ArgumentException("New password hash cannot be empty.", nameof(newPasswordHash));
+        PasswordHash = newPasswordHash;
+    }
 }
