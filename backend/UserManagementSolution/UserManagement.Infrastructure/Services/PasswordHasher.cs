@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UserManagement.Application.Interfaces;
 
-namespace UserManagement.Infrastructure.Services
+namespace UserManagement.Infrastructure.Services;
+
+public class PasswordHasher : IPasswordHasher
 {
-    internal class PasswordHasher
-    {
-    }
 }
