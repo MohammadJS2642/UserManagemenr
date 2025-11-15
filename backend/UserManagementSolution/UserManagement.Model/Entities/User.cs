@@ -2,7 +2,7 @@
 
 namespace UserManagement.Domain.Entities;
 
-public class User
+public class User : AuditableEntity
 {
     public User(string username, Email email, string passwordHash)
     {
@@ -25,6 +25,7 @@ public class User
         if (!IsActive)
             throw new InvalidOperationException("User is already disabled.");
         IsActive = false;
+        Modify();
     }
 
     public void ChangePassword(string newPasswordHash)
@@ -32,5 +33,6 @@ public class User
         if (string.IsNullOrWhiteSpace(newPasswordHash))
             throw new ArgumentException("New password hash cannot be empty.", nameof(newPasswordHash));
         PasswordHash = newPasswordHash;
+        Modify();
     }
 }
