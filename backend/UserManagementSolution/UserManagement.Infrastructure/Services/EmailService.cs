@@ -2,10 +2,6 @@
 
 namespace UserManagement.Infrastructure.Services;
 
-public class EmailService : IEmailService
+public class EmailService 
 {
-    public Task SendWelcomeEmailAsync(string email)
-    {
-        throw new NotImplementedException();
-    }
 }
