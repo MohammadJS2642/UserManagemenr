@@ -5,6 +5,7 @@ namespace UserManagement.Domain.Entities;
 
 public class User : AuditableEntity
 {
+    private User() { } // For EF Core
     public User(string username, Email email, string passwordHash)
     {
         Username = username;

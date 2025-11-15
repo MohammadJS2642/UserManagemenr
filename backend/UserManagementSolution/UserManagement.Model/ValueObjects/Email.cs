@@ -2,6 +2,8 @@
 
 public class Email
 {
+    private Email() { }
+
     public string Value { get; }
     public Email(string value)
     {

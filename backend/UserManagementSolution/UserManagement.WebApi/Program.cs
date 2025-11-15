@@ -1,5 +1,6 @@
 using UserManagement.Application.Interfaces;
 using UserManagement.Application.UseCases;
+using UserManagement.Infrastructure;
 using UserManagement.Infrastructure.Persistence;
 using UserManagement.Infrastructure.Services;
 
@@ -10,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
+
+builder.Services.AddInfrastructure(builder.Configuration.GetConnectionString("DefaultConnection")!);
 
 builder.Services.AddScoped<CreateUserUseCase>();
 

@@ -3,7 +3,13 @@ using UserManagement.Domain.Entities;
 
 namespace UserManagement.Infrastructure.Persistence;
 
-public class UserManagementDbContext : DbContext
+public class UserManagementDbContext(DbContextOptions options) : DbContext(options)
 {
     public DbSet<User> Users { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        //base.OnModelCreating(modelBuilder);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(UserManagementDbContext).Assembly);
+    }
 }

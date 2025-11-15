@@ -1,0 +1,1 @@
+modelBuilder.ApplyConfigurationsFromAssembly(typeof(UserManagementDbContext).Assembly);
