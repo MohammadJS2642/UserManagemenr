@@ -1,4 +1,4 @@
-﻿namespace UserManagement.Domain.Entities;
+﻿namespace UserManagement.Domain.Common;
 
 public abstract class AuditableEntity
 {
