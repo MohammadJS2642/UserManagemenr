@@ -20,6 +20,9 @@ public class User : AuditableEntity
     public string PasswordHash { get; private set; }
     public bool IsActive { get; private set; }
 
+    private readonly List<Role> _roles = [];
+    // user نباید role رو مستقیم تغییر بده
+    public IReadOnlyCollection<Role> Roles => _roles.AsReadOnly();
 
     // Business Rule
     public void Disable()
@@ -36,5 +39,15 @@ public class User : AuditableEntity
             throw new ArgumentException("New password hash cannot be empty.", nameof(newPasswordHash));
         PasswordHash = newPasswordHash;
         Modify();
+    }
+
+    public void AddRole(Role role)
+    {
+        ArgumentNullException.ThrowIfNull(role);
+
+        if (_roles.Any(r => r.Id == role.Id))
+            return;
+
+        _roles.Add(role);
     }
 }

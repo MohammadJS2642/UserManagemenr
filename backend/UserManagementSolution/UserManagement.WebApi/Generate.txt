@@ -1,3 +1,3 @@
-modelBuilder.ApplyConfigurationsFromAssembly(typeof(UserManagementDbContext).Assembly);
+dotnet ef  migrations add RoleEntityAdded -p .\UserManagement.Infrastructure\ -s .\UserManagement.WebApi\
 
 dotnet ef database update -p .\UserManagement.Infrastructure\ -s .\UserManagement.WebApi\

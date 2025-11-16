@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using UserManagement.Application.Interfaces;
 using UserManagement.Infrastructure.Persistence;
 
 namespace UserManagement.Infrastructure;
@@ -13,6 +14,9 @@ public static class DependencyInjection
         {
             options.UseSqlServer(connectionString);
         });
+
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+
         return services;
     }
 }

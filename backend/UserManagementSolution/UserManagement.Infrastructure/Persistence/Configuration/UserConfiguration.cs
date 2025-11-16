@@ -16,5 +16,9 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         });
         builder.Property(u => u.Username).IsRequired();
         builder.Property(u => u.PasswordHash).IsRequired();
+
+        builder.HasMany(u => u.Roles)
+            .WithMany(r => r.Users)
+            .UsingEntity(j => j.ToTable("UserRoles"));
     }
 }
