@@ -1,5 +1,5 @@
 using UserManagement.Application.Interfaces;
-using UserManagement.Application.UseCases;
+using UserManagement.Application.UseCases.User;
 using UserManagement.Infrastructure;
 using UserManagement.Infrastructure.Persistence;
 using UserManagement.Infrastructure.Services;

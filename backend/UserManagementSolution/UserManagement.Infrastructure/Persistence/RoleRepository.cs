@@ -1,4 +1,5 @@
-﻿using UserManagement.Application.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using UserManagement.Application.Interfaces;
 using UserManagement.Domain.Entities;
 
 namespace UserManagement.Infrastructure.Persistence;
@@ -6,6 +7,8 @@ namespace UserManagement.Infrastructure.Persistence;
 public class RoleRepository(UserManagementDbContext _context) : IRoleRepository
 {
     public async Task AddAsync(Role role) => await _context.Roles.AddAsync(role);
+
+    public async Task<IEnumerable<Role>> GetAllAsync() => await _context.Roles.ToListAsync();
 
     public async Task<Role?> GetByIdAsync(int id) => await _context.Roles.FindAsync(id);
 

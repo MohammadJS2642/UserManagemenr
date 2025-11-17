@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using UserManagement.Application.UseCases;
+using UserManagement.Application.UseCases.User;
 using UserManagement.WebApi.DTOs;
 
 namespace UserManagement.WebApi.Controllers;

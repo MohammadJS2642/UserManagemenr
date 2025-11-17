@@ -11,6 +11,7 @@ public class UserManagementDbContext(DbContextOptions options) : DbContext(optio
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         //base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<Role>().HasQueryFilter(r => r.DeletedAt == null);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(UserManagementDbContext).Assembly);
     }
 }

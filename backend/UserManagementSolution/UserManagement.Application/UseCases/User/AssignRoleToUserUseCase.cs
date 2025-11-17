@@ -1,6 +1,6 @@
 ﻿using UserManagement.Application.Interfaces;
 
-namespace UserManagement.Application.UseCases;
+namespace UserManagement.Application.UseCases.User;
 
 public class AssignRoleToUserUseCase(IUserRepository _userRepo, IRoleRepository _roleRepo, IUnitOfWork _uow)
 {
