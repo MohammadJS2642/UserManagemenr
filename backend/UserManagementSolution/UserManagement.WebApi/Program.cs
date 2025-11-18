@@ -8,13 +8,18 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-//builder.Services.AddScoped<IEmailService, EmailService>();
-builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
-
 builder.Services.AddInfrastructure(builder.Configuration.GetConnectionString("DefaultConnection")!);
 
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+//builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
 builder.Services.AddScoped<CreateUserUseCase>();
+builder.Services.AddScoped<DisableUserUseCase>();
+builder.Services.AddScoped<AssignRoleToUserUseCase>();
 
 
 builder.Services.AddControllers();
