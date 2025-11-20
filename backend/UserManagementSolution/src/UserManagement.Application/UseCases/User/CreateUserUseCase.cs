@@ -4,7 +4,7 @@ using UserManagement.Domain.ValueObjects;
 
 namespace UserManagement.Application.UseCases.User;
 
-public class CreateUserUseCase(IUserRepository Repo/*, IEmailService EmailService*/)
+public class CreateUserUseCase(IUnitOfWork uow, IUserRepository repo/*, IEmailService EmailService*/)
 {
     public async Task<UserManagement.Domain.Entities.User> ExecuteAsync(string userName, string email, string password)
     {
@@ -12,8 +12,8 @@ public class CreateUserUseCase(IUserRepository Repo/*, IEmailService EmailServic
         //var hash = _passwordHash.Hash(password);
 
         var user = new UserManagement.Domain.Entities.User(userName, emailObj, password);
-        await Repo.AddAsync(user);
-        await Repo.SaveChangesAsync();
+        await repo.AddAsync(user);
+        await uow.SaveChangesAsync();
 
         //await EmailService.SendWelcomeEmailAsync(email);
 
