@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\UserManagement.Infrastructure\UserManagement.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\UserManagement.Model\UserManagement.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

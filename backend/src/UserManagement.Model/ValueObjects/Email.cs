@@ -1,6 +1,6 @@
 ﻿namespace UserManagement.Domain.ValueObjects;
 
-public class Email
+public record Email
 {
     private Email() { }
 

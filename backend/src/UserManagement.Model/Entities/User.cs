@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using UserManagement.Domain.Common;
+﻿using UserManagement.Domain.Common;
 using UserManagement.Domain.ValueObjects;
 
 namespace UserManagement.Domain.Entities;
