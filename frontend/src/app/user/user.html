@@ -1,0 +1,15 @@
+<p>user works!</p>
+
+
+<table>
+    <tr>
+        <th>Username</th>
+        <th>Email</th>
+    </tr>
+    @for (userItem of users; track $index) {
+    <tr>
+        <td>{{userItem.userName}}</td>
+        <td>{{userItem.email}}</td>
+    </tr>
+    }
+</table>
