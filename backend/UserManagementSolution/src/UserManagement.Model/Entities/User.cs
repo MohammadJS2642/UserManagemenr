@@ -1,4 +1,5 @@
-﻿using UserManagement.Domain.Common;
+﻿using System.Runtime.InteropServices;
+using UserManagement.Domain.Common;
 using UserManagement.Domain.ValueObjects;
 
 namespace UserManagement.Domain.Entities;
@@ -8,10 +9,17 @@ public class User : AuditableEntity
     private User() { } // For EF Core
     public User(string username, Email email, string passwordHash)
     {
+        CheckUsernameLenght(username);
         Username = username;
         Email = email;
         PasswordHash = passwordHash;
         IsActive = true;
+    }
+
+    private static void CheckUsernameLenght(string username)
+    {
+        if (username.Length == 0)
+            throw new ArgumentException("username must be fill");
     }
 
     public int Id { get; private set; }
