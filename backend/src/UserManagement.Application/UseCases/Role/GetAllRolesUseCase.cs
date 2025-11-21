@@ -1,12 +1,14 @@
-﻿using UserManagement.Application.Interfaces;
-using UserManagement.Domain.Entities;
+﻿using AutoMapper;
+using UserManagement.Application.Contracts.Response;
+using UserManagement.Application.Interfaces;
 
 namespace UserManagement.Application.UseCases.RoleUseCase;
 
-public class GetAllRolesUseCase(IRoleRepository _roleRepositoyry)
+public class GetAllRolesUseCase(IMapper _mapper, IRoleRepository _roleRepositoyry)
 {
-    public async Task<IEnumerable<Role>> ExecuteAsync()
+    public async Task<IEnumerable<RoleResponse>> ExecuteAsync()
     {
-        return await _roleRepositoyry.GetAllAsync();
+        var results = await _roleRepositoyry.GetAllAsync();
+        return _mapper.Map<IEnumerable<RoleResponse>>(results);
     }
 }

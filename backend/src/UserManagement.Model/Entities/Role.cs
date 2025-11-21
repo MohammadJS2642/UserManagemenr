@@ -7,9 +7,7 @@ public class Role : AuditableEntity
     public int Id { get; private set; }
     public string Name { get; private set; }
     public int CreatedBy { get; set; }
-    public DateTime CreatedAt { get; set; }
     public int? ModifiedBy { get; set; }
-    public DateTime? ModifiedAt { get; set; }
     public DateTime? DeletedAt { get; set; }
 
     public ICollection<User> Users { get; } = new List<User>();
