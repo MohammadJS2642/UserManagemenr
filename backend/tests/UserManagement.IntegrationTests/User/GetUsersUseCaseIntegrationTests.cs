@@ -1,5 +1,8 @@
-﻿using FluentAssertions;
+﻿using AutoMapper;
+using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using UserManagement.Application.Mapping;
 using UserManagement.Application.UseCases.User;
 using UserManagement.Domain.ValueObjects;
 using UserManagement.Infrastructure.Persistence;
@@ -10,12 +13,21 @@ namespace UserManagement.IntegrationTests.User;
 public class GetUsersUseCaseIntegrationTests
 {
     private readonly DbContextOptions<UserManagementDbContext> _options;
+    private readonly IMapper _mapper;
 
     public GetUsersUseCaseIntegrationTests()
     {
         _options = new DbContextOptionsBuilder<UserManagementDbContext>()
             .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
             .Options;
+
+        var lgf = LoggerFactory.Create(builder => builder.SetMinimumLevel(LogLevel.Warning));
+
+        var mapperConfig = new MapperConfiguration(cfg =>
+        {
+            cfg.AddMaps(typeof(UserProfile).Assembly);
+        }, lgf);
+        _mapper = mapperConfig.CreateMapper();
     }
 
     private async Task SeedDatasAsync()
@@ -39,7 +51,7 @@ public class GetUsersUseCaseIntegrationTests
         using var context = new UserManagementDbContext(_options);
 
         var repo = new UserRepository(context);
-        var useCase = new GetUsersUseCase(repo);
+        var useCase = new GetUsersUseCase(_mapper, repo);
 
         var result = await useCase.ExecuteAsync();
 
@@ -52,7 +64,7 @@ public class GetUsersUseCaseIntegrationTests
         await SeedDatasAsync();
         using var context = new UserManagementDbContext(_options);
         var repo = new UserRepository(context);
-        var useCase = new GetUsersUseCase(repo);
+        var useCase = new GetUsersUseCase(_mapper, repo);
         var result = await useCase.ExecuteAsync(u => u.Id == 3);
         result.Should().HaveCount(1);
         result.All(u => u.Id == 3).Should().BeTrue();
@@ -64,10 +76,10 @@ public class GetUsersUseCaseIntegrationTests
         await SeedDatasAsync();
         using var context = new UserManagementDbContext(_options);
         var repo = new UserRepository(context);
-        var useCase = new GetUsersUseCase(repo);
+        var useCase = new GetUsersUseCase(_mapper, repo);
         var result = await useCase.ExecuteAsync(u => u.Username == "user4");
         result.Should().HaveCount(1);
-        result.All(u => u.Username == "user4").Should().BeTrue();
+        result.All(u => u.UserName == "user4").Should().BeTrue();
     }
 
     [Fact]
@@ -76,7 +88,7 @@ public class GetUsersUseCaseIntegrationTests
         await SeedDatasAsync();
         using var context = new UserManagementDbContext(_options);
         var repo = new UserRepository(context);
-        var useCase = new GetUsersUseCase(repo);
+        var useCase = new GetUsersUseCase(_mapper, repo);
         var result = await useCase.ExecuteAsync(u => u.Username == "nonexistentuser");
         result.Should().BeEmpty();
     }
@@ -87,7 +99,7 @@ public class GetUsersUseCaseIntegrationTests
         await SeedDatasAsync();
         using var context = new UserManagementDbContext(_options);
         var repo = new UserRepository(context);
-        var useCase = new GetUsersUseCase(repo);
+        var useCase = new GetUsersUseCase(_mapper, repo);
         var result = await useCase.ExecuteAsync(u => u.Id == 2 && u.Username.Contains("user"));
         result.Should().HaveCount(1);
         result.All(u => u.Id == 2).Should().BeTrue();
