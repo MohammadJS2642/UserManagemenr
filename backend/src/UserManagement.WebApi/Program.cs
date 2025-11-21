@@ -24,6 +24,23 @@ builder.Services.AddScoped<CreateUserUseCase>();
 builder.Services.AddScoped<DisableUserUseCase>();
 builder.Services.AddScoped<AssignRoleToUserUseCase>();
 
+var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();
+builder.Services.AddCors(c =>
+{
+    c.AddPolicy("AllowAngularClient", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    });
+
+    c.AddPolicy("ProductionClient", policy =>
+    {
+        policy.WithOrigins(allowedOrigins ?? [])
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    });
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -41,7 +58,14 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+
 app.UseHttpsRedirection();
+
+if (app.Environment.IsDevelopment())
+    app.UseCors("AllowAngularClient");
+else
+    app.UseCors("ProductionClient");
+
 
 app.UseAuthorization();
 
