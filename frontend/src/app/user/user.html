@@ -5,11 +5,21 @@
     <tr>
         <th>Username</th>
         <th>Email</th>
+        <th></th>
     </tr>
     @for (userItem of users(); track $index) {
     <tr>
         <td>{{userItem.userName}}</td>
         <td>{{userItem.email}}</td>
+        <td><button type="button" (click)="disableUser(userItem.id!)">DsiableUser</button></td>
     </tr>
     }
 </table>
+
+<form [formGroup]="requestForm">
+    <input type="text" placeholder="Username" formControlName="username" />
+    <input type="text" placeholder="Email" formControlName="email" />
+    <input type="text" placeholder="Password" formControlName="passwordHash" />
+
+    <button type="button" (click)="createUser()">submit</button>
+</form>
