@@ -48,12 +48,9 @@ public class UsersController(
     public async Task<IActionResult> DisableUser(int id)
     {
         var disabled = await _disableUserUseCase.ExecuteAsync(id);
-        switch (disabled)
-        {
-            case true:
-                return Ok("User disabled successfully.");
-            case false:
-                return StatusCode(500, "Failed to disable user.");
-        }
+        if (disabled)
+            return Ok(new { success = true, mesage = "User disabled successfully." });
+
+        return StatusCode(500, new { success = false, message = "Failed to disable user." });
     }
 }
