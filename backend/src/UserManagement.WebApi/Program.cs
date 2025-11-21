@@ -23,6 +23,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<CreateUserUseCase>();
 builder.Services.AddScoped<DisableUserUseCase>();
 builder.Services.AddScoped<AssignRoleToUserUseCase>();
+builder.Services.AddScoped<GetUsersUseCase>();
 
 var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();
 builder.Services.AddCors(c =>

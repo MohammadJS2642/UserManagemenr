@@ -8,6 +8,7 @@ namespace UserManagement.WebApi.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 public class UsersController(
+    GetUsersUseCase getUser,
     CreateUserUseCase createUser,
     DisableUserUseCase _disableUserUseCase,
     IUserRepository _userRepository
@@ -39,7 +40,7 @@ public class UsersController(
     [HttpGet("GetAllUsers")]
     public async Task<IActionResult> GetAllUsers()
     {
-        var users = await _userRepository.GetAllAsync();
+        var users = await getUser.ExecuteAsync();
         return Ok(users);
     }
 
