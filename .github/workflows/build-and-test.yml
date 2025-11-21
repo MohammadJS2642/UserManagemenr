@@ -22,10 +22,10 @@ jobs:
         uses: actions/setup-dotnet@v3
 
       - name: Install dependencies
-        run: dotnet restore
+        run: dotnet restore ./backend
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build ./backend --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test --no-restore --verbosity normal
+        run: dotnet test ./backend --no-restore --verbosity normal
