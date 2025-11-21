@@ -1,5 +1,6 @@
 using UserManagement.Application;
 using UserManagement.Application.Interfaces;
+using UserManagement.Application.UseCases.RoleUseCase;
 using UserManagement.Application.UseCases.User;
 using UserManagement.Infrastructure;
 using UserManagement.Infrastructure.Persistence;
@@ -24,6 +25,11 @@ builder.Services.AddScoped<CreateUserUseCase>();
 builder.Services.AddScoped<DisableUserUseCase>();
 builder.Services.AddScoped<AssignRoleToUserUseCase>();
 builder.Services.AddScoped<GetUsersUseCase>();
+
+builder.Services.AddScoped<CreateRoleUseCase>();
+builder.Services.AddScoped<DeleteRoleUseCase>();
+builder.Services.AddScoped<GetRoleUseCase>();
+builder.Services.AddScoped<GetAllRolesUseCase>();
 
 var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();
 builder.Services.AddCors(c =>
