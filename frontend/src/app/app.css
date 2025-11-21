@@ -1,0 +1,12 @@
+.main-layout {
+  display: flex;
+  height: calc(100vh-60px);
+  overflow: hidden;
+}
+
+.container-area {
+  flex: 1;
+  padding: 20px;
+  background-origin: #f4f6f9;
+  overflow-y: auto;
+}
