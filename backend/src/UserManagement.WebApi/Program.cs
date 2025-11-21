@@ -1,3 +1,4 @@
+using UserManagement.Application;
 using UserManagement.Application.Interfaces;
 using UserManagement.Application.UseCases.User;
 using UserManagement.Infrastructure;
@@ -9,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddInfrastructure(builder.Configuration.GetConnectionString("DefaultConnection")!);
+
+builder.Services.ApplicationLayerInjection();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
