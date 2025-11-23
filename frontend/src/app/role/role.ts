@@ -4,6 +4,7 @@ import { RoleModel } from './domain/Role.Model';
 
 @Component({
   selector: 'app-role',
+  standalone: true,
   imports: [],
   templateUrl: './role.html',
   styleUrl: './role.css',
