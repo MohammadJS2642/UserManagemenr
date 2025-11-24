@@ -11,11 +11,8 @@
     </tr>
     }
 </table>
-<!-- 
-<form [formGroup]="requestForm">
-    <input type="text" placeholder="Username" formControlName="username" />
-    <input type="text" placeholder="Email" formControlName="email" />
-    <input type="text" placeholder="Password" formControlName="passwordHash" />
 
-    <button type="button" (click)="createUser()">submit</button>
-</form> -->
+<form [formGroup]="requestForm">
+    <input type="text" placeholder="name" formControlName="name" />
+    <button type="button" (click)="createRole()">submit</button>
+</form>
