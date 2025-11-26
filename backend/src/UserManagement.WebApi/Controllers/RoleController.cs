@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UserManagement.Application.Contracts.Request;
 using UserManagement.Application.UseCases.RoleUseCase;
+using UserManagement.Domain.Security;
 
 namespace UserManagement.WebApi.Controllers;
 

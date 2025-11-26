@@ -5,6 +5,8 @@ using UserManagement.Application.UseCases.User;
 using UserManagement.Infrastructure;
 using UserManagement.Infrastructure.Persistence;
 using UserManagement.Infrastructure.Services;
+using UserManagement.WebApi.Middleware;
+using UserManagement.WebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,14 +14,21 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddInfrastructure(builder.Configuration.GetConnectionString("DefaultConnection")!);
 
+builder.Services.AddHttpContextAccessor();
 builder.Services.ApplicationLayerInjection();
+
+builder.Services.AddScoped<PermissionFilter>();
+builder.Services.AddScoped<IUserContextService, UserContextService>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+builder.Services.AddScoped<IPermissionRepository, PermissionRepository>();
+builder.Services.AddScoped<IRolePermissionRepository, RolePermissionRepository>();
 //builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+builder.Services.AddScoped<IPermissionSyncService, PermissionSyncService>();
 
 builder.Services.AddScoped<CreateUserUseCase>();
 builder.Services.AddScoped<DisableUserUseCase>();
@@ -49,7 +58,10 @@ builder.Services.AddCors(c =>
     });
 });
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<PermissionFilter>();
+});
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -63,6 +75,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
     app.MapOpenApi();
+
+    using var scope = app.Services.CreateScope();
+    var sync = scope.ServiceProvider.GetRequiredService<IPermissionSyncService>();
+    await sync.SyncPermissionAsync();
 }
 
 

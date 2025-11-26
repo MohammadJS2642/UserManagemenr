@@ -2,6 +2,7 @@
 using UserManagement.Application.Contracts.Request;
 using UserManagement.Application.Interfaces;
 using UserManagement.Application.UseCases.User;
+using UserManagement.Domain.Security;
 
 namespace UserManagement.WebApi.Controllers;
 
@@ -15,6 +16,7 @@ public class UsersController(
 ) : ControllerBase
 {
     [HttpPost]
+    [Permission("user.create", "create user")]
     public async Task<IActionResult> CreateUser([FromBody] CreateUserRequests request)
     {
         if (request == null)

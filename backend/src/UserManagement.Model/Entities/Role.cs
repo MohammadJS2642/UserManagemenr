@@ -12,6 +12,13 @@ public class Role : AuditableEntity
 
     public ICollection<User> Users { get; } = new List<User>();
 
+    //private readonly List<Permission> _permissions = [];
+    //public IReadOnlyCollection<Permission> Permissions => _permissions.AsReadOnly();
+
+
+    public ICollection<RolePermission> RolePermissions { get; set; }
+
+
     private Role() { }
     public Role(string name) => Name = name ?? throw new ArgumentNullException(nameof(name));
 
