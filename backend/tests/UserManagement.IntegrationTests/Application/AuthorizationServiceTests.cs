@@ -40,9 +40,9 @@ public class AuthorizationServiceTests
 
         await context.SaveChangesAsync();
 
-        var userData = userRepository.GetUsersAsync(u => u.Username == user.Username).Result.FirstOrDefault();
-        var roleData = roleRepository.GetByIdsAsync(r => r.Name == role.Name).Result.FirstOrDefault();
-        var permData = permissionRepository.GetByFilterAsync(pr => pr.Code == perm.Code).Result.FirstOrDefault();
+        var userData = (await userRepository.GetUsersAsync(u => u.Username == user.Username)).FirstOrDefault();
+        var roleData = (await roleRepository.GetByIdsAsync(r => r.Name == role.Name)).FirstOrDefault();
+        var permData = (await permissionRepository.GetByFilterAsync(pr => pr.Code == perm.Code)).FirstOrDefault();
 
         var rp = new RolePermission() { RoleId = roleData!.Id, PermissionId = permData!.Id };
         await rpRepository.AddAsync(rp);

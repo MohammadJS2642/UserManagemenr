@@ -1,17 +1,15 @@
-﻿using Microsoft.Extensions.Logging;
-using System.Reflection;
+﻿using System.Reflection;
 using UserManagement.Application.Contracts.Response;
 using UserManagement.Application.Interfaces;
 using UserManagement.Domain.Entities;
-using UserManagement.Domain.Security;
+using UserManagement.WebApi.Middleware;
 
 namespace UserManagement.Infrastructure.Services;
 
 
 public class PermissionSyncService(
     IPermissionRepository permissionRepository,
-    IUnitOfWork uow,
-    ILogger<PermissionSyncService> logger
+    IUnitOfWork uow
 ) : IPermissionSyncService
 {
     public async Task<PermissionSyncResult> SyncPermissionAsync()

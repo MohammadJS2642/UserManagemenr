@@ -14,11 +14,11 @@ public class AuthorizationService(
 {
     public async Task<bool> HasPermissionAsync(int userId, string permissionCode)
     {
-        var currentUser = await userRepository.GetByIdAsync(userId);
+        var currentUser = await userRepository.GetUserByRoles(u => u.Id == userId);
         if (currentUser == null || !currentUser.IsActive)
             return false;
 
-        var userRoles = currentUser.Roles.Select(r => r.Id).ToList();
+        var userRoles = currentUser.UserRoles.Select(r => r.RoleId).ToList();
 
         var hasPermission = await rolePermissionRepository.GetByFilterAsync(r =>
             userRoles.Contains(r.RoleId)

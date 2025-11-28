@@ -9,5 +9,6 @@ public interface IUserRepository
     Task AddAsync(User user);
     Task<User?> GetByIdAsync(int id);
     Task<IEnumerable<User>> GetAllAsync();
+    Task<User?> GetUserByRoles(Expression<Func<User, bool>> predicate);
     Task SaveChangesAsync();
 }

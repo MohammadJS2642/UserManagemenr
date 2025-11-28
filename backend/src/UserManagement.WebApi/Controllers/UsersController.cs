@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using UserManagement.Application.Contracts.Request;
 using UserManagement.Application.Interfaces;
 using UserManagement.Application.UseCases.User;
-using UserManagement.Domain.Security;
+using UserManagement.WebApi.Middleware;
 
 namespace UserManagement.WebApi.Controllers;
 
@@ -16,7 +17,7 @@ public class UsersController(
 ) : ControllerBase
 {
     [HttpPost]
-    [Permission("user.create", "create user")]
+    //[Permission("user.create", "create user")]
     public async Task<IActionResult> CreateUser([FromBody] CreateUserRequests request)
     {
         if (request == null)
@@ -40,6 +41,7 @@ public class UsersController(
     }
 
     [HttpGet("GetAllUsers")]
+    [Permission("user.getallusers", "Get All Users")]
     public async Task<IActionResult> GetAllUsers()
     {
         var users = await getUser.ExecuteAsync();
@@ -55,4 +57,17 @@ public class UsersController(
 
         return StatusCode(500, new { success = false, message = "Failed to disable user." });
     }
+
+    [HttpGet("test-auth")]
+    [Authorize]
+    public IActionResult Test()
+    {
+        return Ok(new
+        {
+            Authenticated = User.Identity?.IsAuthenticated,
+            Name = User.Identity?.Name,
+            Claims = User.Claims.Select(c => new { c.Type, c.Value })
+        });
+    }
+
 }

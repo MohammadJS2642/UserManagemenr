@@ -10,7 +10,9 @@ public class Role : AuditableEntity
     public int? ModifiedBy { get; set; }
     public DateTime? DeletedAt { get; set; }
 
-    public ICollection<User> Users { get; } = new List<User>();
+    public ICollection<UserRole> UserRoles { get; set; }
+
+    //public ICollection<User> Users { get; } = new List<User>();
 
     //private readonly List<Permission> _permissions = [];
     //public IReadOnlyCollection<Permission> Permissions => _permissions.AsReadOnly();

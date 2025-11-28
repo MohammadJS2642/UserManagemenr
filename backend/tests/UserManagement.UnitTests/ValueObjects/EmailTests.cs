@@ -22,7 +22,7 @@ public class EmailTests
     [InlineData("       ")]
     [InlineData(null)]
     [InlineData("invalid.com")]
-    public void CreateEmail_WithInvalidValue_ShouldThrowArgumentException(string emailString)
+    public void CreateEmail_WithInvalidValue_ShouldThrowArgumentException(string? emailString)
     {
         // Act
         var email = () => new Email(emailString!);

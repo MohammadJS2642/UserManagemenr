@@ -13,7 +13,7 @@ public class CreateUserIntegrationTests
 {
     private readonly DbContextOptions<UserManagementDbContext> _contextOptions;
     private readonly IMapper _mapper;
-    private readonly ILoggerFactory _loggerFactory;
+    //private readonly ILoggerFactory _loggerFactory;
     public CreateUserIntegrationTests()
     {
         _contextOptions = new DbContextOptionsBuilder<UserManagementDbContext>()
