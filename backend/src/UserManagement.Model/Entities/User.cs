@@ -52,13 +52,28 @@ public class User : AuditableEntity
     }
 
     // TODO: AddRole method if needed in future
-    //public void AddRole(Role role)
-    //{
-    //    ArgumentNullException.ThrowIfNull(role);
+    public void AddRole(Role role)
+    {
+        if (_userRoles.Any(r => r.Id == role.Id))
+            return;
 
-    //    if (_userRoles.Any(r => r.Id == role.Id))
-    //        return;
+        _userRoles.Add(new UserRole(Id, role.Id));
+    }
 
-    //    _userRoles.Add(role);
-    //}
+    internal void AddRoleTest(Role role)
+    {
+        if (_userRoles.Any(r => r.Id == role.Id))
+            return;
+
+        _userRoles.Add(new UserRole(1, Id, role.Id));
+    }
+
+    internal User(int id, string username, Email email, string passwordHash)
+    {
+        Id = id;
+        Username = username;
+        Email = email;
+        PasswordHash = passwordHash;
+        IsActive = true;
+    }
 }

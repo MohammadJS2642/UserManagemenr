@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using UserManagement.Application.Interfaces;
 
-namespace UserManagement.WebApi.Services;
+namespace UserManagement.WebApi.Middleware;
 
 public class UserContextService(IHttpContextAccessor _httpAccessor) : IUserContextService
 {

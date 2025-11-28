@@ -5,13 +5,12 @@ using System.Text;
 using UserManagement.Application;
 using UserManagement.Application.Contracts.Auth;
 using UserManagement.Application.Interfaces;
-using UserManagement.Application.UseCases.RoleUseCase;
+using UserManagement.Application.UseCases.Role;
 using UserManagement.Application.UseCases.User;
 using UserManagement.Infrastructure;
 using UserManagement.Infrastructure.Persistence;
 using UserManagement.Infrastructure.Services;
 using UserManagement.WebApi.Middleware;
-using UserManagement.WebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

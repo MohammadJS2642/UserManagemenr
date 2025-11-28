@@ -10,4 +10,18 @@ public class UserRole : AuditableEntity
 
     public int RoleId { get; private set; }
     public Role Role { get; private set; } = null!;
+
+    private UserRole() { }
+    public UserRole(int userId, int roleId)
+    {
+        UserId = userId;
+        RoleId = roleId;
+    }
+
+    internal UserRole(int id, int userId, int roleId)
+    {
+        Id = id;
+        UserId = userId;
+        RoleId = roleId;
+    }
 }

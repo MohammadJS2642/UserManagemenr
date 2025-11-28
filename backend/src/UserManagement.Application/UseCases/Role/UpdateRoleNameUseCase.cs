@@ -2,7 +2,7 @@
 using UserManagement.Application.Contracts.Request;
 using UserManagement.Application.Interfaces;
 
-namespace UserManagement.Application.UseCases.RoleUseCase;
+namespace UserManagement.Application.UseCases.Role;
 
 public class UpdateRoleNameUseCase(/*IMapper mapper,*/ IRoleRepository _roleRepository, IUnitOfWork uow)
 {

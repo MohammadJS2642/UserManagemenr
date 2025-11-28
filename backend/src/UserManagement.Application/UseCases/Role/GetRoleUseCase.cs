@@ -1,11 +1,11 @@
 ﻿using UserManagement.Application.Interfaces;
-using UserManagement.Domain.Entities;
+using RoleEntity=UserManagement.Domain.Entities.Role;
 
-namespace UserManagement.Application.UseCases.RoleUseCase;
+namespace UserManagement.Application.UseCases.Role;
 
 public class GetRoleUseCase(IRoleRepository _roleRepository)
 {
-    public async Task<Role> ExecuteAsync(int roleId)
+    public async Task<RoleEntity> ExecuteAsync(int roleId)
     {
         var role = await _roleRepository.GetByIdAsync(roleId) ??
             throw new KeyNotFoundException($"Role with ID {roleId} not found.");

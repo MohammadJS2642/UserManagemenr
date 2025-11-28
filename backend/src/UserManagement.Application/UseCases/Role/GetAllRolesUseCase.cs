@@ -2,7 +2,7 @@
 using UserManagement.Application.Contracts.Response;
 using UserManagement.Application.Interfaces;
 
-namespace UserManagement.Application.UseCases.RoleUseCase;
+namespace UserManagement.Application.UseCases.Role;
 
 public class GetAllRolesUseCase(IMapper _mapper, IRoleRepository _roleRepositoyry)
 {

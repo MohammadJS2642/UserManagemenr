@@ -2,9 +2,8 @@
 using UserManagement.Application.Contracts.Response;
 using UserManagement.Application.Interfaces;
 using UserManagement.Domain.Entities;
-using UserManagement.WebApi.Middleware;
 
-namespace UserManagement.Infrastructure.Services;
+namespace UserManagement.WebApi.Middleware;
 
 
 public class PermissionSyncService(

@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System.Collections.Immutable;
+using System.Linq.Expressions;
 using UserManagement.Application.Interfaces;
 using UserEntity = UserManagement.Domain.Entities.User;
 
@@ -16,7 +17,7 @@ internal class FakeUserRepository : IUserRepository
 
     public Task<IEnumerable<Domain.Entities.User>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return Task.FromResult(Users.AsEnumerable());
     }
 
     public Task<Domain.Entities.User?> GetByEmailAsync(string email)
@@ -31,7 +32,7 @@ internal class FakeUserRepository : IUserRepository
 
     public Task<Domain.Entities.User?> GetUserByRoles(Expression<Func<Domain.Entities.User, bool>> predicate)
     {
-        throw new NotImplementedException();
+        return Task.FromResult(Users.AsQueryable().FirstOrDefault(predicate));
     }
 
     public Task<IEnumerable<Domain.Entities.User>> GetUsersAsync(Expression<Func<Domain.Entities.User, bool>>? predicate = null)

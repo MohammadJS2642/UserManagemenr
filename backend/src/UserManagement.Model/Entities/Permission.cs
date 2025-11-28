@@ -17,4 +17,10 @@ public class Permission : AuditableEntity
         Code = code ?? throw new ArgumentNullException(nameof(code));
         Description = description ?? throw new ArgumentNullException(nameof(description));
     }
+    internal Permission(int id, string code, string description)
+    {
+        Id = id;
+        Code = code ?? throw new ArgumentNullException(nameof(code));
+        Description = description ?? throw new ArgumentNullException(nameof(description));
+    }
 }

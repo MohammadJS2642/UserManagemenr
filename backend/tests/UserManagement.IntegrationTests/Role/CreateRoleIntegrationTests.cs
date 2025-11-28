@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using UserManagement.Application.Contracts.Request;
 using UserManagement.Application.Mapping;
-using UserManagement.Application.UseCases.RoleUseCase;
+using UserManagement.Application.UseCases.Role;
 using UserManagement.Infrastructure.Persistence;
 
-namespace UserManagement.IntegrationTests;
+namespace UserManagement.IntegrationTests.Role;
 
 public class CreateRoleIntegrationTests
 {

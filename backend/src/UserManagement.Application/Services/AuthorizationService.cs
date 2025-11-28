@@ -2,11 +2,6 @@
 
 namespace UserManagement.Application.Services;
 
-public interface IAuthorizationService
-{
-    Task<bool> HasPermissionAsync(int userId, string permissionCode);
-}
-
 public class AuthorizationService(
     IUserRepository userRepository,
     IRolePermissionRepository rolePermissionRepository

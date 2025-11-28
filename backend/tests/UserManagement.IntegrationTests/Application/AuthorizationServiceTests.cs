@@ -7,7 +7,7 @@ using UserManagement.Infrastructure.Persistence;
 using RoleEntity = UserManagement.Domain.Entities.Role;
 using UserEntity = UserManagement.Domain.Entities.User;
 
-namespace UserManagement.IntegrationTests;
+namespace UserManagement.IntegrationTests.Application;
 
 public class AuthorizationServiceTests
 {
@@ -44,7 +44,7 @@ public class AuthorizationServiceTests
         var roleData = (await roleRepository.GetByIdsAsync(r => r.Name == role.Name)).FirstOrDefault();
         var permData = (await permissionRepository.GetByFilterAsync(pr => pr.Code == perm.Code)).FirstOrDefault();
 
-        var rp = new RolePermission() { RoleId = roleData!.Id, PermissionId = permData!.Id };
+        var rp = new RolePermission(roleData!.Id, permData!.Id);
         await rpRepository.AddAsync(rp);
 
         await context.SaveChangesAsync();

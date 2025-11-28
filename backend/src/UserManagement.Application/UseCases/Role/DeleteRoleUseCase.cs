@@ -1,6 +1,6 @@
 ﻿using UserManagement.Application.Interfaces;
 
-namespace UserManagement.Application.UseCases.RoleUseCase;
+namespace UserManagement.Application.UseCases.Role;
 
 public class DeleteRoleUseCase(IRoleRepository _roleRepository, IUnitOfWork uow)
 {

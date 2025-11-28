@@ -7,8 +7,8 @@ public class Role : AuditableEntity
     public int Id { get; private set; }
     public string Name { get; private set; }
     public int CreatedBy { get; set; }
-    public int? ModifiedBy { get; set; }
-    public DateTime? DeletedAt { get; set; }
+    public int? ModifiedBy { get; private set; }
+    public DateTime? DeletedAt { get; private set; }
 
     public ICollection<UserRole> UserRoles { get; set; }
 
@@ -23,6 +23,12 @@ public class Role : AuditableEntity
 
     private Role() { }
     public Role(string name) => Name = name ?? throw new ArgumentNullException(nameof(name));
+
+    internal Role(int id, string name)
+    {
+        Id = id;
+        Name = name;
+    }
 
     public void Remove()
     {
