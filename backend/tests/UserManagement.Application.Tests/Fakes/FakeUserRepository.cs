@@ -27,7 +27,7 @@ internal class FakeUserRepository : IUserRepository
 
     public Task<Domain.Entities.User?> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return Task.FromResult(Users.FirstOrDefault(x => x.Id == id));
     }
 
     public Task<Domain.Entities.User?> GetUserByRoles(Expression<Func<Domain.Entities.User, bool>> predicate)
