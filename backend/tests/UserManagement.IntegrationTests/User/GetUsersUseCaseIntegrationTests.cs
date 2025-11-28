@@ -51,7 +51,7 @@ public class GetUsersUseCaseIntegrationTests
         using var context = new UserManagementDbContext(_options);
 
         var repo = new UserRepository(context);
-        var useCase = new GetUsersUseCase(_mapper, repo);
+        var useCase = new GetUsersUseCase(repo);
 
         var result = await useCase.ExecuteAsync();
 
@@ -64,7 +64,7 @@ public class GetUsersUseCaseIntegrationTests
         await SeedDatasAsync();
         using var context = new UserManagementDbContext(_options);
         var repo = new UserRepository(context);
-        var useCase = new GetUsersUseCase(_mapper, repo);
+        var useCase = new GetUsersUseCase(repo);
         var result = await useCase.ExecuteAsync(u => u.Id == 3);
         result.Should().HaveCount(1);
         result.All(u => u.Id == 3).Should().BeTrue();
@@ -76,10 +76,10 @@ public class GetUsersUseCaseIntegrationTests
         await SeedDatasAsync();
         using var context = new UserManagementDbContext(_options);
         var repo = new UserRepository(context);
-        var useCase = new GetUsersUseCase(_mapper, repo);
+        var useCase = new GetUsersUseCase(repo);
         var result = await useCase.ExecuteAsync(u => u.Username == "user4");
         result.Should().HaveCount(1);
-        result.All(u => u.UserName == "user4").Should().BeTrue();
+        result.All(u => u.Username == "user4").Should().BeTrue();
     }
 
     [Fact]
@@ -88,7 +88,7 @@ public class GetUsersUseCaseIntegrationTests
         await SeedDatasAsync();
         using var context = new UserManagementDbContext(_options);
         var repo = new UserRepository(context);
-        var useCase = new GetUsersUseCase(_mapper, repo);
+        var useCase = new GetUsersUseCase(repo);
         var result = await useCase.ExecuteAsync(u => u.Username == "nonexistentuser");
         result.Should().BeEmpty();
     }
@@ -99,7 +99,7 @@ public class GetUsersUseCaseIntegrationTests
         await SeedDatasAsync();
         using var context = new UserManagementDbContext(_options);
         var repo = new UserRepository(context);
-        var useCase = new GetUsersUseCase(_mapper, repo);
+        var useCase = new GetUsersUseCase(repo);
         var result = await useCase.ExecuteAsync(u => u.Id == 2 && u.Username.Contains("user"));
         result.Should().HaveCount(1);
         result.All(u => u.Id == 2).Should().BeTrue();
