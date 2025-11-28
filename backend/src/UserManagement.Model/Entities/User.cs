@@ -27,9 +27,12 @@ public class User : AuditableEntity
     public string PasswordHash { get; private set; }
     public bool IsActive { get; private set; }
 
-    private readonly List<Role> _roles = [];
-    // user نباید role رو مستقیم تغییر بده
-    public IReadOnlyCollection<Role> Roles => _roles.AsReadOnly();
+    //private readonly List<Role> _roles = [];
+    //// user نباید role رو مستقیم تغییر بده
+    //public IReadOnlyCollection<Role> Roles => _roles.AsReadOnly();
+
+    private readonly List<UserRole> _userRoles = new();
+    public IReadOnlyCollection<UserRole> UserRoles => _userRoles.AsReadOnly();
 
     // Business Rule
     public void Disable()
@@ -48,13 +51,14 @@ public class User : AuditableEntity
         Modify();
     }
 
-    public void AddRole(Role role)
-    {
-        ArgumentNullException.ThrowIfNull(role);
+    // TODO: AddRole method if needed in future
+    //public void AddRole(Role role)
+    //{
+    //    ArgumentNullException.ThrowIfNull(role);
 
-        if (_roles.Any(r => r.Id == role.Id))
-            return;
+    //    if (_userRoles.Any(r => r.Id == role.Id))
+    //        return;
 
-        _roles.Add(role);
-    }
+    //    _userRoles.Add(role);
+    //}
 }

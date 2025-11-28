@@ -4,7 +4,7 @@ using UserManagement.Application.Interfaces;
 
 namespace UserManagement.Application.UseCases.RoleUseCase;
 
-public class UpdateRoleNameUseCase(IMapper mapper, IRoleRepository _roleRepository, IUnitOfWork uow)
+public class UpdateRoleNameUseCase(/*IMapper mapper,*/ IRoleRepository _roleRepository, IUnitOfWork uow)
 {
     public async Task ExecuteAsync(UpdateRoleRequests request)
     {

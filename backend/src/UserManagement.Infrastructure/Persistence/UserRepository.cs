@@ -13,6 +13,11 @@ public class UserRepository(UserManagementDbContext context) : IUserRepository
 
     public async Task<User?> GetByIdAsync(int id) => await context.Users.SingleAsync(c => c.Id == id);
 
+    public async Task<User?> GetUserByRoles(Expression<Func<User, bool>> predicate)
+    {
+        return await context.Users.Include(u => u.UserRoles).ThenInclude(r => r.Role).SingleOrDefaultAsync(predicate);
+    }
+
     public async Task<IEnumerable<User>> GetUsersAsync(Expression<Func<User, bool>>? predicate = null)
     {
         IQueryable<User> query = context.Users.AsQueryable();
