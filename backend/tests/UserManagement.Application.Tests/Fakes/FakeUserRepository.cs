@@ -1,5 +1,4 @@
-﻿using System.Collections.Immutable;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using UserManagement.Application.Interfaces;
 using UserEntity = UserManagement.Domain.Entities.User;
 
@@ -37,7 +36,7 @@ internal class FakeUserRepository : IUserRepository
 
     public Task<IEnumerable<Domain.Entities.User>> GetUsersAsync(Expression<Func<Domain.Entities.User, bool>>? predicate = null)
     {
-        throw new NotImplementedException();
+        return Task.FromResult(Users.AsEnumerable());
     }
 
     public Task SaveChangesAsync()
