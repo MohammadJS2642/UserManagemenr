@@ -11,6 +11,11 @@ public class UserRepository(UserManagementDbContext context) : IUserRepository
 
     public async Task<IEnumerable<User>> GetAllAsync() => await context.Users.ToListAsync();
 
+    public async Task<User?> GetByEmailAsync(string email)
+    {
+        return await context.Users.SingleOrDefaultAsync(c => c.Email.Value == email);
+    }
+
     public async Task<User?> GetByIdAsync(int id) => await context.Users.SingleAsync(c => c.Id == id);
 
     public async Task<User?> GetUserByRoles(Expression<Func<User, bool>> predicate)

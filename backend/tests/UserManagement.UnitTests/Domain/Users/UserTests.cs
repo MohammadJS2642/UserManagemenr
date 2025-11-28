@@ -2,7 +2,7 @@
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.ValueObjects;
 
-namespace UserManagement.UnitTests.Domain.Users;
+namespace UserManagement.Domain.UnitTests.Domain.Users;
 
 public class UserTests
 {

@@ -7,7 +7,7 @@ using UserManagement.Application.Mapping;
 using UserManagement.Application.UseCases.RoleUseCase;
 using UserManagement.Infrastructure.Persistence;
 
-namespace UserManagement.IntegrationTests.Role;
+namespace UserManagement.IntegrationTests;
 
 public class CreateRoleIntegrationTests
 {

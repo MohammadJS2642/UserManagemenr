@@ -8,7 +8,7 @@ using UserManagement.Domain.ValueObjects;
 using UserManagement.Infrastructure.Persistence;
 using userDomain = UserManagement.Domain.Entities.User;
 
-namespace UserManagement.IntegrationTests.User;
+namespace UserManagement.IntegrationTests;
 
 public class GetUsersUseCaseIntegrationTests
 {

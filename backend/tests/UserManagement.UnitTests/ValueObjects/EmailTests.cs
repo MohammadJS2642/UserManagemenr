@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using UserManagement.Domain.ValueObjects;
 
-namespace UserManagement.UnitTests.ValueObjects;
+namespace UserManagement.Domain.UnitTests.ValueObjects;
 
 public class EmailTests
 {

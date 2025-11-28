@@ -7,7 +7,7 @@ using UserManagement.Infrastructure.Persistence;
 using RoleEntity = UserManagement.Domain.Entities.Role;
 using UserEntity = UserManagement.Domain.Entities.User;
 
-namespace UserManagement.IntegrationTests.Application;
+namespace UserManagement.IntegrationTests;
 
 public class AuthorizationServiceTests
 {

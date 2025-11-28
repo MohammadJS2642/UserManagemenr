@@ -1,24 +1,28 @@
-﻿using AutoMapper;
-using UserManagement.Application.Contracts.Request;
+﻿using UserManagement.Application.Contracts.Request;
 using UserManagement.Application.Contracts.Response;
 using UserManagement.Application.Interfaces;
 
 namespace UserManagement.Application.UseCases.User;
 
-public class CreateUserUseCase(IUnitOfWork uow, IMapper _mapper, IUserRepository repo/*, IEmailService EmailService*/)
+public class CreateUserUseCase(IUserRepository userRepository, IPasswordHasher passwordHasher, IUnitOfWork uow/*, IEmailService EmailService*/)
 {
     public async Task<UserResponse> ExecuteAsync(CreateUserRequests request)
     {
-        //var emailObj = new Email(email);
-        //var hash = _passwordHash.Hash(password);
+        // Rule: email must be unique
+        var existing = await userRepository.GetByEmailAsync(request.Email);
+        if (existing is not null)
+            throw new Exception("Email is already in use.");
 
-        //var user = new UserManagement.Domain.Entities.User(userName, emailObj, password);
-        var user = _mapper.Map<UserManagement.Domain.Entities.User>(request);
-        await repo.AddAsync(user);
+        // Rule: password must be hashed
+        //var hashed = passwordHasher.GetHashCode(request.PasswordHash);
+
+        var user = new Domain.Entities.User(request.Username, new Domain.ValueObjects.Email(request.Email), request.PasswordHash);
+
+        await userRepository.AddAsync(user);
         await uow.SaveChangesAsync();
 
         //await EmailService.SendWelcomeEmailAsync(email);
 
-        return _mapper.Map<UserResponse>(user);
+        return new UserResponse(user.Id, user.Username, user.Email.Value);
     }
 }

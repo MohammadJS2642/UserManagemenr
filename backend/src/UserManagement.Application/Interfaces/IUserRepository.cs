@@ -10,5 +10,6 @@ public interface IUserRepository
     Task<User?> GetByIdAsync(int id);
     Task<IEnumerable<User>> GetAllAsync();
     Task<User?> GetUserByRoles(Expression<Func<User, bool>> predicate);
+    Task<User?> GetByEmailAsync(string email);
     Task SaveChangesAsync();
 }
